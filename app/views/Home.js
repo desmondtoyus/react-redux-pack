@@ -55,10 +55,11 @@ const {value, search, results, err} =state.home;
 return { value, search, results, err};
 }
 
-const mapDispatchToProps = (dispatch) => {
+export const mapDispatchToProps = (dispatch) => {
   return {
-    changeInput: (props, value) => dispatch(changeInput(props, value)),
-    fetchData: (payload) => dispatch(fetchData(payload))
+
+    changeInput: evt => dispatch(changeInput(evt)),
+    fetchData: payload => dispatch(fetchData(payload))
   }
 }
 

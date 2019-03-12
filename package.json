@@ -34,6 +34,15 @@
     ],
     "testPathIgnorePatterns": [
       "<rootDir>/__tests__/setup/"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "web.js",
+      "mjs",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
     ]
   },
   "dependencies": {
@@ -72,6 +81,7 @@
     "react-testing-library": "^6.0.0",
     "redux-devtools-extension": "^2.13.8",
     "redux-mock-store": "^1.5.3",
+    "redux-router": "^2.1.2",
     "sass-loader": "7.1.0",
     "style-loader": "0.23.0",
     "webpack": "4.20.2",
