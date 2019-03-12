@@ -1,0 +1,81 @@
+{
+  "name": "react-pack",
+  "version": "0.1.0",
+  "description": "React Webpack Starter",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --verbose",
+    "test:watch": "jest --watchAll --verbose",
+    "test:coverage": "jest --verbose --coverage",
+    "build": "rimraf ./build && babel-node ./node_modules/webpack/bin/webpack --history-api-fallback && node server",
+    "start": "babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --port 8008 --open --history-api-fallback && nodemon server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/desmondtoyus/react-pack.git"
+  },
+  "keywords": [
+    "React",
+    "Webpack",
+    "NodeJS",
+    "CSS",
+    "HTML",
+    "Javascript"
+  ],
+  "author": "Desmond Ademiluyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/desmondtoyus/react-pack/issues"
+  },
+  "homepage": "https://github.com/desmondtoyus/react-pack#readme",
+  "jest": {
+    "setupFilesAfterEnv": [
+      "<rootDir>__tests__/setup/setupEnzyme.js"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup/"
+    ]
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "dotenv": "^6.2.0",
+    "history": "^4.7.2",
+    "jquery": "^3.3.1",
+    "popper.js": "^1.14.7",
+    "react": "^16.5.2",
+    "react-dom": "^16.5.2",
+    "react-helmet": "^5.2.0",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-router-redux": "^5.0.0-alpha.8",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0",
+    "rimraf": "^2.6.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.1.2",
+    "@babel/node": "7.0.0",
+    "@babel/plugin-proposal-class-properties": "7.0.0",
+    "@babel/preset-env": "7.1.0",
+    "@babel/preset-react": "7.0.0",
+    "babel-loader": "8.0.4",
+    "css-loader": "1.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.10.0",
+    "enzyme-to-json": "^3.3.5",
+    "file-loader": "2.0.0",
+    "html-webpack-plugin": "3.2.0",
+    "jest": "^24.3.1",
+    "node-sass": "4.9.3",
+    "path": "0.12.7",
+    "react-testing-library": "^6.0.0",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-mock-store": "^1.5.3",
+    "sass-loader": "7.1.0",
+    "style-loader": "0.23.0",
+    "webpack": "4.20.2",
+    "webpack-cli": "^3.2.3",
+    "webpack-dev-server": "^3.2.1"
+  }
+}

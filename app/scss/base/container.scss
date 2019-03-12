@@ -1,0 +1,45 @@
+body {
+    background-color: #e4e4e4;
+	font-family: Open Sans;
+    margin-bottom: 50px;
+}
+.container__wrap{
+    margin-bottom: 100px;
+}
+.main{
+    margin-top: 100px;
+}
+footer {
+    background-color: #0b0e21;
+    color: white;
+    letter-spacing: 1px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+}
+
+footer small {
+    margin-bottom: 10px;
+}
+
+footer span {
+    color: crimson;
+}
+
+@media (max-width: 480px) {
+    
+    footer {
+        padding: 5px;
+    }
+    
+    footer small {
+        display: none;
+    }
+}
