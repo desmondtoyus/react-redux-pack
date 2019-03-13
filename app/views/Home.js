@@ -40,8 +40,9 @@ class Home extends React.Component {
                             type="text"
                             value={search}
                             name='search'
+                            id='search'
                             onChange={this.handleChange}/>
-                        <button className="btn btn-outline-success my-2 my-sm-0"  id='search-btn' onClick={this.handleSubmit}>Search</button>
+                        <button className="btn btn-outline-success my-2 my-sm-0"  name='search-btn' id='search-btn' onClick={this.handleSubmit}>Search</button>
                     </form>
                 </div>
                 {err? <span> Input Error</span>: null}
