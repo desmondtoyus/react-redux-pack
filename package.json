@@ -9,7 +9,9 @@
     "test:coverage": "jest --verbose --coverage",
     "dev": "webpack --open --config webpack.dev.js",
     "build": "rimraf ./build && webpack --config webpack.prod.js",
-    "start": "babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development --port 8008 --open --history-api-fallback && nodemon server"
+    "start": "babel-node ./node_modules/webpack-dev-server/bin/webpack-dev-server --mode development --port 8008 --open --history-api-fallback",
+    "startapp": "concurrently \"npm start\" \"nodemon server\"",
+    "startprod":"concurrently \" npm run-script build\" \"node server\""
   },
   "repository": {
     "type": "git",
@@ -49,6 +51,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
+    "concurrently": "^4.1.0",
     "dotenv": "^6.2.0",
     "history": "^4.7.2",
     "jquery": "^3.3.1",
