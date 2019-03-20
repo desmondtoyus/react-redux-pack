@@ -5,13 +5,13 @@ var app = express();
 const PORT = process.env.PORT || 8008;
 
 //REDIRECT TO HTTP
-app.use(function(req, res, next) {
-    if(req.headers['x-forwarded-proto'] === 'https') {
-        res.redirect('http://' + req.hostname + req.url);
-    } else {
-        next();
-    }
-});
+// app.use(function(req, res, next) {
+//     if(req.headers['x-forwarded-proto'] === 'https') {
+//         res.redirect('http://' + req.hostname + req.url);
+//     } else {
+//         next();
+//     }
+// });
 
 app.use(express.static('build'));
 // app.use(express.static(path.join(__dirname, '../app/public')));
