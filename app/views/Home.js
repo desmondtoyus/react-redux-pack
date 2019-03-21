@@ -1,67 +1,108 @@
 import React from 'react';
-import {connect} from 'react-redux';
-import {Link, withRouter} from 'react-router-dom';
-import {Helmet} from 'react-helmet';
-import Jumbotron from '../components/Jumbotron'
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
+import PropTypes from 'prop-types';
 import Table from '../components/Table';
-import { changeInput , fetchData} from "../redux/actions/home.action";
+import { changeInput, fetchData } from '../redux/actions/home.action';
 
 
 class Home extends React.Component {
-
-  componentWillReceiveProps(nextProps){
-    if (this.props.search !== nextProps.search) {
+  componentWillReceiveProps(nextProps) {
+    const { search } = this.props;
+    if (search !== nextProps.search) {
       // this.props.history.push('/about');
     }
   }
-    
-  handleChange = e => {
-  this.props.changeInput({prop:e.target.name, value:e.target.value})
+
+  handleChange = (e) => {
+    const {
+      dispatchChangeInput,
+    } = this.props;
+    dispatchChangeInput({
+      prop: e.target.name,
+      value: e.target.value,
+    });
+  };
+
+    handleSubmit = (event) => {
+      event.preventDefault();
+      const {
+        search,
+        dispatchChangeInput,
+        dispatchFetchData,
+      } = this.props;
+      dispatchChangeInput({ prop: 'err', value: false });
+      if (search === '') {
+        dispatchChangeInput({ prop: 'err', value: true });
+      }
+      dispatchFetchData(search);
     };
 
-    handleSubmit = event => {
-        event.preventDefault();
-        const {search} = this.props;
-        this.props.changeInput({prop:'err', value:false});
-        if (search === '') {
-          this.props.changeInput({prop:'err', value:true});
-        }
-   
-       this.props.fetchData(search);
-    };
     render() {
-      const {search, results, err} = this.props;
-        return (
-            <div className="container">
-                < Table content={results} label={'Home Table'}/>
-                <div>
-                    <form>
-                        <input
-                            type="text"
-                            value={search}
-                            name='search'
-                            id='search'
-                            onChange={this.handleChange}/>
-                        <button className="btn btn-outline-success my-2 my-sm-0"  name='search-btn' id='search-btn' onClick={this.handleSubmit}>Search</button>
-                    </form>
-                </div>
-                {err? <span> Input Error</span>: null}
-            </div>
-        );
+      const {
+        search,
+        results,
+        err,
+      } = this.props;
+      return (
+        <div className="container">
+          <Helmet>
+            <title>Page Title</title>
+            <meta name="description" content="Meta descriptions.." />
+          </Helmet>
+          <Table content={results} label="Home Table" />
+          <div>
+            <form>
+              <input
+                type="text"
+                value={search}
+                name="search"
+                id="search"
+                onChange={this.handleChange}
+              />
+              <button className="btn btn-outline-success my-2 my-sm-0" name="search-btn" id="search-btn" type="submit" onClick={this.handleSubmit}>Search</button>
+            </form>
+          </div>
+          {err ? <span> Input Error</span> : null}
+        </div>
+      );
     }
+}
+
+Home.propTypes = {
+  search: PropTypes.string,
+  results: PropTypes.arrayOf(PropTypes.object),
+  err: PropTypes.bool,
+  dispatchChangeInput: PropTypes.func,
+  dispatchFetchData: PropTypes.func,
+};
+Home.defaultProps = {
+  search: '',
+  results: [],
+  err: false,
+  dispatchChangeInput: null,
+  dispatchFetchData: null,
 };
 
-const mapStateToProps =(state)=>{
-const {value, search, results, err} =state.home;
-return { value, search, results, err};
-}
-
-export const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
+  const {
+    value,
+    search,
+    results,
+    err,
+  } = state.home;
   return {
+    value,
+    search,
+    results,
+    err,
+  };
+};
 
-    changeInput: evt => dispatch(changeInput(evt)),
-    fetchData: payload => dispatch(fetchData(payload))
-  }
-}
+export const mapDispatchToProps = dispatch => ({
+  dispatchChangeInput: evt => dispatch(changeInput(evt)),
+  dispatchFetchData: payload => dispatch(fetchData(payload)),
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Home));

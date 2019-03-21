@@ -13,7 +13,7 @@ const config = {
     filename: 'main.js'
   },
   resolve: {
-    extensions: ['.js', '.jsx', '.css'],
+    extensions: ['.web.js', '.js', '.json', '.web.jsx', '.jsx', '.css'],
   },
   devServer: {
     contentBase: path.join(__dirname,'app'),
@@ -22,9 +22,38 @@ const config = {
   },
   devtool: devMode  ? 'inline-source-map' : false,
   module: {
+    strictExportPresence: true,
   rules: [
+     // Disable require.ensure as it's not a standard language feature.
+     { parser: { requireEnsure: false } },
+     //
+     {
+      test: /\.(js|jsx)$/,
+      enforce: 'pre',
+      use: [
+        {
+          options: {
+            formatter: 'react-dev-utils/eslintFormatter',
+            eslintPath: 'eslint',
+            
+          },
+          loader: 'eslint-loader',
+        },
+      ],
+      include: path.join(__dirname,'app'),
+    },
     {
-      test: /\.js$/,
+      // `mjs` support is still in its infancy in the ecosystem, so we don't
+      // support it.
+      // Modules who define their `browser` or `module` key as `mjs` force
+      // the use of this extension, so we need to tell webpack to fall back
+      // to auto mode (ES Module interop, allows ESM to import CommonJS).
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    },
+    {
+      test: /\.(js|jsx)$/,
       exclude: /node_modules/,
       use: {
         loader: "babel-loader"

@@ -1,61 +1,64 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 
-class Table extends Component{
-    constructor(props){
-        super(props);
-        this.state={
+class Table extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-        }
-    }
-    render(){
-        const {content, label } = this.props;
-        return(
-            <main>
-                {content.length? <div>
-                <span> {label} </span>
+    };
+  }
+
+  render() {
+    const { content, label } = this.props;
+    return (
+      <main>
+        {content.length ? (
+          <div>
+            <span> {label} </span>
             <table className="table  table-sm">
-            <thead className="table-info">
+              <thead className="table-info">
                 <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Registration Date</th>
-                    <th>E-mail address</th>
-                    <th>Premium Plan</th>
+                  <th />
+                  <th>Name</th>
+                  <th>Registration Date</th>
+                  <th>E-mail address</th>
+                  <th>Premium Plan</th>
                 </tr>
-            </thead>
-            <tbody>
-                {content.map((item, index)=>{
-                    return <tr key={index}>
+              </thead>
+              <tbody>
+                {content.map(item => (
+                  <tr key={item.id}>
                     <td>
-                        <label className="custom-control custom-checkbox">
-                            <input type="checkbox" className="custom-control-input"/>
-                            <span className="custom-control-indicator"></span>
-                        </label>
+                      <label htmlFor="checkbox" className="custom-control custom-checkbox">
+                        <input type="checkbox" className="custom-control-input" />
+                        <span className="custom-control-indicator" />
+                      </label>
                     </td>
                     <td>{item.name}</td>
                     <td>{item.date}</td>
                     <td>{item.email}</td>
                     <td>{item.plan}</td>
-                </tr>
-                })}
-            </tbody>
-        </table>
-        </div>:<span> No Content</span>}
-    </main>
-        )
-    }
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        ) : <span> No Content</span>}
+      </main>
+    );
+  }
 }
 
 // Do not include required props in the defaultProps
 Table.propTypes = {
-    label: PropTypes.string.isRequired,
-  content: PropTypes.array
-  };
-  
-  Table.defaultProps = {
-    content: [],
-  };
+  label: PropTypes.string.isRequired,
+  content: PropTypes.arrayOf(PropTypes.object),
+};
 
-  export default Table;
+Table.defaultProps = {
+  content: [],
+};
+
+export default Table;

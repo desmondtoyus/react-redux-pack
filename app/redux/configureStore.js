@@ -1,7 +1,8 @@
-import { combineReducers} from "redux";
-import { homeReducer } from "./reducers";
+import { combineReducers } from 'redux';
+import { homeReducer, userReducer } from './reducers';
 
 const configureStore = combineReducers({
-  home:homeReducer
+  home: homeReducer,
+  user: userReducer,
 });
 export default configureStore;
