@@ -71,14 +71,13 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-  search: PropTypes.string,
+  search: PropTypes.string.isRequired, // default no needed if required
   results: PropTypes.arrayOf(PropTypes.object),
   err: PropTypes.bool,
   dispatchChangeInput: PropTypes.func,
   dispatchFetchData: PropTypes.func,
 };
 Home.defaultProps = {
-  search: '',
   results: [],
   err: false,
   dispatchChangeInput: null,
@@ -87,13 +86,11 @@ Home.defaultProps = {
 
 const mapStateToProps = (state) => {
   const {
-    value,
     search,
     results,
     err,
   } = state.home;
   return {
-    value,
     search,
     results,
     err,
